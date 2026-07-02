@@ -2,6 +2,7 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from backend.app.controllers import (
@@ -29,7 +30,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-assets_dir = Path(__file__).resolve().parents[2] / "assets"
+project_dir = Path(__file__).resolve().parents[2]
+assets_dir = project_dir / "assets"
 app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
 
 _ = models
@@ -51,13 +53,9 @@ def on_startup() -> None:
         db.close()
 
 
-@app.get("/")
-def root() -> dict[str, str]:
-    return {
-        "app": settings.app_name,
-        "version": settings.app_version,
-        "status": "running",
-    }
+@app.get("/", include_in_schema=False)
+def root() -> FileResponse:
+    return FileResponse(project_dir / "index.html")
 
 
 @app.get(f"{settings.api_prefix}/health")
