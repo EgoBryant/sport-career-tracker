@@ -1,0 +1,33 @@
+from backend.app.models.models import (
+    Award,
+    AwardType,
+    CardType,
+    CompetitionType,
+    CupTie,
+    CupMatchResult,
+    CupTournament,
+    GameDay,
+    LeagueMatchResult,
+    LeagueRound,
+    LeagueTeam,
+    MainMatchResult,
+    PlayerProfile,
+    TeamTrophy,
+)
+
+__all__ = [
+    "Award",
+    "AwardType",
+    "CardType",
+    "CompetitionType",
+    "CupTie",
+    "CupMatchResult",
+    "CupTournament",
+    "GameDay",
+    "LeagueMatchResult",
+    "LeagueRound",
+    "LeagueTeam",
+    "MainMatchResult",
+    "PlayerProfile",
+    "TeamTrophy",
+]
